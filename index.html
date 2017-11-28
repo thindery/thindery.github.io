@@ -1,1 +1,79 @@
-Hello World
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<h1>Scanner Demo</h1>
+
+<button class="btn btn-confirm" id="request-device">Allow Device Access</button>
+<textarea></textarea>
+<script>
+/*let button = document.getElementById('request-device');
+button.addEventListener('click', async () => {
+  let device;
+  try {
+    device = await navigator.usb.requestDevice({ filters: [{
+        vendorId: 0xABCD,
+        classCode: 0xFF, // vendor-specific
+        protocolCode: 0x01
+    }]});
+  } catch () {
+    // No device was selected.
+  }
+
+  if (device !== undefined) {
+    // Add |device| to the UI.
+  }
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+  let devices = await navigator.usb.getDevices();
+  devices.forEach(device => {
+    // Add |device| to the UI.
+  });
+});*/
+
+/*navigator.usb.requestDevice({ filters: [{ vendorId: 0x05e0 }] }) //"Symbol company vendor ID" http://www.linux-usb.org/usb.ids
+.then(device => {
+  console.log(device.productName);      // "Arduino Micro"
+  console.log(device.manufacturerName); // "Arduino LLC"
+})
+.catch(error => { console.log(error); });
+
+navigator.usb.getDevices().then(devices => {
+  devices.map(device => {
+    console.log(device.productName);      // "Arduino Micro"
+    console.log(device.manufacturerName); // "Arduino LLC"
+  });
+})*/
+
+var device;
+
+let button = document.getElementById('request-device');
+button.addEventListener('click', async () => {
+  let device;
+  try {
+	device = await navigator.usb.requestDevice({ filters: [{
+    	vendorId: 0x05e0  //"Symbol company vendor ID" http://www.linux-usb.org/usb.ids
+    }]});
+  } catch (error) {
+    // No device was selected.
+  }
+
+  if (device !== undefined) {
+  	console.log(device.productName);
+  	console.log(device);
+  }
+});
+
+/*navigator.usb.requestDevice({ filters: [{ vendorId: 0x05e0 }] })
+.then(selectedDevice => {
+   device = selectedDevice;
+   return device.open(); // Begin a session.
+   console.log(device.productName); 
+ })*/
+
+</script>
+</body>
+</html>
